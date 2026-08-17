@@ -7,9 +7,23 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-label);
+  --font-heading: var(--font-heading);
+  --color-deep-violet: #4b0082;
+  --color-violet-primary: #4a00c1;
+  --color-violet-container: #6320ee;
+  --color-ember: #fe9800;
+  --color-amber-deep: #8a5100;
+  --color-teal-primary: #006456;
+  --color-teal-deep: #004a3f;
+  --color-teal-soft: #50e6ca;
+  --color-peri-blue: #c2cfff;
+  --color-warm-cream: #fff9eb;
+  --color-vibrant-pink: #ff4d6d;
+  --color-spiritual-gold: #ffd700;
+  --color-ink: #181c21;
+  --color-ink-soft: #494456;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
