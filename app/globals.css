@@ -8,8 +8,10 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
-  --font-mono: var(--font-label);
+  --font-body: var(--font-body);
+  --font-subheadline: var(--font-subheadline);
   --font-heading: var(--font-heading);
+  --font-mono: var(--font-label);
   --color-deep-violet: #4b0082;
   --color-violet-primary: #4a00c1;
   --color-violet-container: #6320ee;
@@ -141,4 +143,34 @@
   html {
     @apply font-sans;
   }
+  h2, h3, h4, h5, h6, .font-subheadline {
+    font-family: var(--font-subheadline), var(--font-heading), sans-serif;
+  }
+  h1, .font-heading {
+    font-family: var(--font-heading), sans-serif;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .backdrop-blur-md,
+  .backdrop-blur-sm {
+    background-color: rgb(255 255 255 / 0.95) !important;
+    backdrop-filter: none !important;
+  }
+}
+
+.text-stroke-outside {
+  -webkit-text-stroke: 8px #FAF7F1;
+  paint-order: stroke fill;
 }

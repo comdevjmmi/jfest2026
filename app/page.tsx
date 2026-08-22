@@ -1,3 +1,27 @@
+"use client";
+
+import { useRef, type ReactNode } from "react";
+import { Preloader } from "@/components/Preloader";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { About } from "@/components/About";
+import { Philosophy } from "@/components/Philosophy";
+import { MascotPhilosophy } from "@/components/MascotPhilosophy";
+import { Countdown } from "@/components/Countdown";
+import { Activities } from "@/components/Activities";
+import { Timeline } from "@/components/Timeline";
+import { SupportedBy } from "@/components/SupportedBy";
+import { FAQ } from "@/components/FAQ";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
+import { ScrollToTop } from "@/components/ScrollToTop";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+  type Variants,
+} from "motion/react";
 import {
   ArrowRight,
   Flame,
@@ -84,131 +108,88 @@ const testimonials = [
   },
 ];
 
+const spring = { type: "spring", bounce: 0, duration: 0.5 } as const;
+
+const revealVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0 },
+};
+
+function Reveal({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ ...spring, delay }}
+      variants={revealVariants}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function GlassCard({ children, className }: { children: ReactNode; className?: string }) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={spring}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-peri-blue font-sans text-ink">
+      <Preloader />
       <Navbar />
       <Hero />
-      <StatsStrip />
-      <Programs />
-      <Schedule />
-      <Testimonials />
-      <CTA />
+      <About />
+      <Philosophy />
+      <MascotPhilosophy />
+      <Countdown />
+      <Activities />
+      <Timeline />
+      {/* <SupportedBy /> */}
+      <FAQ />
+      <Contact />
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }
 
-function Navbar() {
-  return (
-    <header className="sticky top-0 z-50 border-b border-white/20 bg-white/60 backdrop-blur-md">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#" className="flex items-center gap-2">
-          <span className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-deep-violet to-ember font-heading text-sm font-bold text-white">
-            J
-          </span>
-          <span className="font-heading text-lg font-bold tracking-tight">
-            JFEST<span className="text-violet-primary">26</span>
-          </span>
-        </a>
-        <div className="hidden items-center gap-8 text-sm font-medium text-ink-soft md:flex">
-          <a href="#program" className="transition-colors hover:text-ink">
-            Program
-          </a>
-          <a href="#jadwal" className="transition-colors hover:text-ink">
-            Jadwal
-          </a>
-          <a href="#tiket" className="transition-colors hover:text-ink">
-            Tiket
-          </a>
-          <a href="#kontak" className="transition-colors hover:text-ink">
-            Kontak
-          </a>
-        </div>
-        <a
-          href="#tiket"
-          className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-deep-violet to-ember px-5 py-2 text-sm font-semibold text-white shadow-[0_8px_24px_rgba(99,32,238,0.35)] transition-transform hover:scale-[1.03]"
-        >
-          Daftar Sekarang <ArrowRight className="size-4" />
-        </a>
-      </nav>
-    </header>
-  );
-}
 
-function Hero() {
-  return (
-    <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 left-1/4 h-96 w-96 rounded-full bg-violet-container/30 blur-3xl" />
-        <div className="absolute right-1/5 top-1/3 h-80 w-80 rounded-full bg-ember/30 blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-teal-primary/20 blur-3xl" />
-      </div>
-      <div className="relative mx-auto flex max-w-7xl flex-col items-center px-6 py-24 text-center md:py-32">
-        <p className="font-mono text-xs font-medium tracking-[0.25em] text-violet-primary uppercase">
-          12–14 September 2026 · Jakarta
-        </p>
-        <h1 className="mt-6 max-w-4xl font-heading text-4xl font-extrabold tracking-tight text-balance sm:text-5xl md:text-6xl">
-          Langkah Spiritual,{" "}
-          <span className="bg-gradient-to-r from-deep-violet via-violet-primary to-ember bg-clip-text text-transparent">
-            Energi Juara
-          </span>
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-soft">
-          JFEST 2026 menghadirkan perpaduan olahraga kompetitif dan praktik
-          mindfulness dalam satu festival. Temukan ketenangan batin dan taklukkan
-          tantangan — karena juara sejati lahir dari keseimbangan.
-        </p>
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <a
-            href="#tiket"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-deep-violet to-ember px-8 py-3.5 font-semibold text-white shadow-[0_10px_30px_rgba(254,152,0,0.35)] transition-transform hover:scale-[1.03]"
-          >
-            Ambil Tiket <ArrowRight className="size-4" />
-          </a>
-          <a
-            href="#program"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-teal-primary/40 bg-white/70 px-8 py-3.5 font-semibold text-teal-deep backdrop-blur-md transition-colors hover:bg-white"
-          >
-            Lihat Program
-          </a>
-        </div>
-        <div className="mt-16 grid w-full max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border border-white/20 bg-white/60 p-5 text-left shadow-lg shadow-violet-container/5 backdrop-blur-md">
-            <CalendarDays className="size-5 text-violet-container" />
-            <p className="mt-3 font-heading text-sm font-semibold">Tanggal</p>
-            <p className="text-sm text-ink-soft">12–14 September 2026</p>
-          </div>
-          <div className="rounded-xl border border-white/20 bg-white/60 p-5 text-left shadow-lg shadow-violet-container/5 backdrop-blur-md">
-            <MapPin className="size-5 text-ember" />
-            <p className="mt-3 font-heading text-sm font-semibold">Lokasi</p>
-            <p className="text-sm text-ink-soft">Jakarta International Stadium</p>
-          </div>
-          <div className="rounded-xl border border-white/20 bg-white/60 p-5 text-left shadow-lg shadow-violet-container/5 backdrop-blur-md">
-            <Trophy className="size-5 text-spiritual-gold" />
-            <p className="mt-3 font-heading text-sm font-semibold">Tema</p>
-            <p className="text-sm text-ink-soft">Spiritual & Juara</p>
-          </div>
-        </div>
-      </div>
-      <div className="h-16 -skew-y-1 bg-gradient-to-r from-deep-violet via-violet-primary to-ember" />
-    </section>
-  );
-}
 
 function StatsStrip() {
   return (
-    <section className="bg-gradient-to-r from-deep-violet via-violet-primary to-ember">
+    <section className="relative z-10 bg-gradient-to-r from-deep-violet via-violet-primary to-ember pt-8 sm:pt-12 md:pt-16 pb-8">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-px px-6 py-12 md:grid-cols-4">
-        {stats.map((s) => (
-          <div key={s.label} className="px-4 py-4 text-center text-white">
-            <p className="font-heading text-3xl font-extrabold md:text-4xl">
-              {s.value}
-            </p>
-            <p className="mt-1 font-mono text-xs tracking-widest text-white/80 uppercase">
-              {s.label}
-            </p>
-          </div>
+        {stats.map((s, i) => (
+          <Reveal key={s.label} delay={i * 0.08}>
+            <div className="px-4 py-4 text-center text-white">
+              <p className="font-heading text-3xl font-extrabold md:text-4xl">
+                {s.value}
+              </p>
+              <p className="mt-1 font-mono text-xs tracking-widest text-white/80 uppercase">
+                {s.label}
+              </p>
+            </div>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -221,38 +202,54 @@ function Programs() {
       <div className="pointer-events-none absolute -right-20 top-10 size-72 rounded-full bg-vibrant-pink/20 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-mono text-xs font-medium tracking-[0.25em] text-ember uppercase">
-            Program Unggulan
-          </p>
-          <h2 className="mt-4 font-heading text-3xl font-bold tracking-tight text-balance md:text-4xl">
-            Satu Festival, Dua Energi
-          </h2>
-          <p className="mt-4 text-lg text-ink-soft">
-            Rangkaian kegiatan dirancang untuk menguatkan fisik dan menenangkan
-            batin.
-          </p>
+          <Reveal>
+            <p className="font-mono text-xs font-medium tracking-[0.25em] text-ember uppercase">
+              Program Unggulan
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="mt-4 font-heading text-3xl font-bold tracking-[-0.02em] text-balance md:text-4xl">
+              Satu Festival, Dua Energi
+            </h2>
+          </Reveal>
+          <Reveal delay={0.2}>
+            <p className="mt-4 text-lg text-ink-soft">
+              Rangkaian kegiatan dirancang untuk menguatkan fisik dan menenangkan
+              batin.
+            </p>
+          </Reveal>
         </div>
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {programs.map((p) => (
-            <div
+            <motion.div
               key={p.title}
-              className="group rounded-xl border border-white/20 bg-white/60 p-6 shadow-lg shadow-violet-container/5 backdrop-blur-md transition-all hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(255,215,0,0.25)]"
+              className="group rounded-xl border border-white/20 bg-white/60 p-6 shadow-lg shadow-violet-container/5 backdrop-blur-md"
+              initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={spring}
+              whileHover={{ y: -6 }}
             >
-              <div className="flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-full bg-gradient-to-br from-deep-violet to-ember text-white shadow-[0_6px_16px_rgba(99,32,238,0.35)]">
+              <motion.div
+                className="flex items-center justify-between"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ ...spring, delay: 0.1 }}
+              >
+                <motion.span
+                  className="grid size-12 place-items-center rounded-full bg-gradient-to-br from-deep-violet to-ember text-white shadow-[0_6px_16px_rgba(99,32,238,0.35)]"
+                  whileHover={{ scale: 1.1, rotate: -6 }}
+                >
                   <p.icon className="size-5" />
-                </span>
+                </motion.span>
                 <span className="font-mono text-[10px] font-medium tracking-widest text-ink-soft">
                   {p.tag}
                 </span>
-              </div>
-              <h3 className="mt-5 font-heading text-lg font-semibold">
-                {p.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                {p.desc}
-              </p>
-            </div>
+              </motion.div>
+              <h3 className="mt-5 font-heading text-lg font-semibold">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">{p.desc}</p>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -261,40 +258,63 @@ function Programs() {
 }
 
 function Schedule() {
+  const lineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: lineRef,
+    offset: ["start 0.8", "end 0.5"],
+  });
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const reduced = useReducedMotion();
+
   return (
     <section id="jadwal" className="relative py-24">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-warm-cream to-transparent" />
       <div className="relative mx-auto max-w-4xl px-6">
         <div className="text-center">
-          <p className="font-mono text-xs font-medium tracking-[0.25em] text-violet-primary uppercase">
-            Satu Hari Bersama JFEST
-          </p>
-          <h2 className="mt-4 font-heading text-3xl font-bold tracking-tight text-balance md:text-4xl">
-            Alur Energimu
-          </h2>
+          <Reveal>
+            <p className="font-mono text-xs font-medium tracking-[0.25em] text-violet-primary uppercase">
+              Satu Hari Bersama JFEST
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h2 className="mt-4 font-heading text-3xl font-bold tracking-[-0.02em] text-balance md:text-4xl">
+              Alur Energimu
+            </h2>
+          </Reveal>
         </div>
-        <div className="relative mt-14">
-          <div className="absolute left-4 top-0 h-full w-1 rotate-6 rounded-full bg-gradient-to-b from-deep-violet via-ember to-teal-primary md:left-1/2" />
+        <div className="relative mt-14" ref={lineRef}>
+          <motion.div
+            className="absolute left-4 top-0 h-full w-1 rotate-6 rounded-full bg-gradient-to-b from-deep-violet via-ember to-teal-primary md:left-1/2"
+            style={{ scaleY: reduced ? 1 : scaleY, originY: 0 }}
+          />
           <div className="space-y-8">
             {schedule.map((item, i) => (
               <div
                 key={item.time}
                 className={`relative flex items-center gap-6 ${
-                  i % 2 === 0
-                    ? "md:flex-row-reverse md:text-right"
-                    : "md:text-left"
+                  i % 2 === 0 ? "md:flex-row-reverse md:text-right" : "md:text-left"
                 }`}
               >
-                <div className="absolute left-4 size-4 -translate-x-1/2 rounded-full border-2 border-white bg-gradient-to-br from-deep-violet to-ember shadow-[0_0_12px_rgba(99,32,238,0.6)] md:left-1/2" />
+                <motion.div
+                  className="absolute left-4 size-4 -translate-x-1/2 rounded-full border-2 border-white bg-gradient-to-br from-deep-violet to-ember shadow-[0_0_12px_rgba(99,32,238,0.6)] md:left-1/2"
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ ...spring, delay: i * 0.05 }}
+                />
                 <div className="w-10 md:w-1/2" />
-                <div className="ml-10 flex-1 rounded-xl border border-white/20 bg-white/70 p-5 shadow-lg shadow-violet-container/5 backdrop-blur-md md:ml-0">
+                <motion.div
+                  className="ml-10 flex-1 rounded-xl border border-white/20 bg-white/70 p-5 shadow-lg shadow-violet-container/5 backdrop-blur-md md:ml-0"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ ...spring, delay: i * 0.05 }}
+                >
                   <p className="font-mono text-xs font-semibold tracking-widest text-ember">
                     {item.time} · {item.kind}
                   </p>
-                  <h3 className="mt-1 font-heading text-base font-semibold">
-                    {item.title}
-                  </h3>
-                </div>
+                  <h3 className="mt-1 font-heading text-base font-semibold">{item.title}</h3>
+                </motion.div>
               </div>
             ))}
           </div>
@@ -310,10 +330,7 @@ function Testimonials() {
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid gap-6 md:grid-cols-2">
           {testimonials.map((t) => (
-            <figure
-              key={t.name}
-              className="rounded-xl border border-white/20 bg-white/60 p-8 shadow-lg shadow-violet-container/5 backdrop-blur-md"
-            >
+            <GlassCard key={t.name} className="rounded-xl border border-white/20 bg-white/60 p-8 shadow-lg shadow-violet-container/5 backdrop-blur-md">
               <Quote className="size-7 text-ember" />
               <blockquote className="mt-4 text-lg leading-relaxed text-ink">
                 “{t.quote}”
@@ -327,7 +344,7 @@ function Testimonials() {
                   <p className="font-mono text-xs text-ink-soft">{t.role}</p>
                 </div>
               </figcaption>
-            </figure>
+            </GlassCard>
           ))}
         </div>
       </div>
@@ -336,13 +353,27 @@ function Testimonials() {
 }
 
 function CTA() {
+  const reduced = useReducedMotion();
+
   return (
     <section id="tiket" className="px-6 py-24">
-      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl bg-gradient-to-br from-deep-violet via-violet-primary to-ember p-10 text-center text-white shadow-[0_24px_60px_rgba(99,32,238,0.4)] md:p-16">
+      <motion.div
+        className="relative mx-auto max-w-5xl overflow-hidden rounded-2xl bg-gradient-to-br from-deep-violet via-violet-primary to-ember p-10 text-center text-white shadow-[0_24px_60px_rgba(99,32,238,0.4)] md:p-16"
+        initial={{ opacity: 0, y: 40, scale: reduced ? 1 : 0.96 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={spring}
+      >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,215,0,0.25),transparent_50%),radial-gradient(circle_at_bottom_left,rgba(80,230,202,0.25),transparent_50%)]" />
         <div className="relative">
-          <Flame className="mx-auto size-10 text-spiritual-gold" />
-          <h2 className="mt-6 font-heading text-3xl font-extrabold tracking-tight text-balance md:text-5xl">
+          <motion.span
+            className="mx-auto grid size-14 place-items-center rounded-full bg-white/15 backdrop-blur-sm"
+            animate={reduced ? undefined : { rotate: [0, 8, -8, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <Flame className="size-7 text-spiritual-gold" />
+          </motion.span>
+          <h2 className="mt-6 font-heading text-3xl font-extrabold tracking-[-0.02em] text-balance md:text-5xl">
             Siap Menjadi Juara Sejati?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg text-white/85">
@@ -350,44 +381,26 @@ function CTA() {
             garis start.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <a
+            <motion.a
               href="#"
-              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 font-semibold text-violet-primary transition-transform hover:scale-[1.03]"
+              className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 font-semibold text-violet-primary active:scale-95"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Zap className="size-4" /> Beli Tiket
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#kontak"
-              className="inline-flex items-center gap-2 rounded-full border border-white/50 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-white/10"
+              className="inline-flex items-center gap-2 rounded-full border border-white/50 px-8 py-3.5 font-semibold text-white transition-colors hover:bg-white/10 active:scale-95"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.95 }}
             >
               Hubungi Panitia
-            </a>
+            </motion.a>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
 
-function Footer() {
-  return (
-    <footer id="kontak" className="border-t border-white/20 bg-white/60 py-12 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
-        <div>
-          <p className="font-heading text-lg font-bold">
-            JFEST<span className="text-violet-primary">26</span>
-          </p>
-          <p className="mt-1 max-w-sm text-sm text-ink-soft">
-            Langkah Spiritual, Energi Juara. © 2026 Panitia JFEST.
-          </p>
-        </div>
-        <div className="flex items-center gap-6 font-mono text-xs tracking-widest text-ink-soft uppercase">
-          <a href="#program" className="hover:text-ink">Program</a>
-          <a href="#jadwal" className="hover:text-ink">Jadwal</a>
-          <a href="#tiket" className="hover:text-ink">Tiket</a>
-          <a href="#" className="hover:text-ink">Instagram</a>
-        </div>
-      </div>
-    </footer>
-  );
-}
