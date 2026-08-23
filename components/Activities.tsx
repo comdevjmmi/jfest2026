@@ -42,7 +42,7 @@ const activities: Activity[] = [
     btnBg: "bg-[#FF7E1D] hover:bg-[#e06910]",
     date: "12 September 2026",
     location: "Kampus ITS Surabaya",
-    registerUrl: "https://jfest2026.com/register/funrun", // <-- Fun Run registration link
+    registerUrl: "https://registin.id/events/7be5b58a", // <-- Fun Run registration link
   },
   {
     id: "donor",
@@ -58,7 +58,7 @@ const activities: Activity[] = [
     btnBg: "bg-[#FF4D79] hover:bg-[#e63662]",
     date: "12 September 2026",
     location: "Gedung Pusat Robotika ITS",
-    registerUrl: "https://jfest2026.com/register/donor", // <-- Donor Darah registration link
+    registerUrl: "https://registin.id/events/a83223a2", // <-- Donor Darah registration link
   },
   {
     id: "kajian",
@@ -74,7 +74,7 @@ const activities: Activity[] = [
     btnBg: "bg-[#6320EE] hover:bg-[#4d16c5]",
     date: "12 September 2026",
     location: "Masjid Manarul Ilmi ITS",
-    registerUrl: "https://jfest2026.com/register/kajian", // <-- Kajian registration link
+    registerUrl: "https://registin.id/events/2d0b295a", // <-- Kajian registration link
   },
 ];
 
