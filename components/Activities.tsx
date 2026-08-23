@@ -34,8 +34,7 @@ const activities: Activity[] = [
     category: "Olahraga",
     description:
       "Berlari bersama menyusuri rute ikonik kota, kumpulkan energi, dan raih medali kebanggaan.",
-    image:
-      "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?auto=format&fit=crop&w=800&q=80",
+    image: "/images/card/card-funrun.png",
     badgeBg: "bg-[#FF8A00]",
     badgeIcon: Flame,
     pillBg: "bg-[#E2F9F0]",
@@ -51,8 +50,7 @@ const activities: Activity[] = [
     category: "Sosial",
     description:
       "Setetes darahmu menyelamatkan nyawa. Wujud nyata kepedulian sosial untuk sesama.",
-    image:
-      "https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=800&q=80",
+    image: "/images/card/card-donor-darah.png",
     badgeBg: "bg-[#FF4D79]",
     badgeIcon: HeartHandshake,
     pillBg: "bg-[#FFE6EC]",
@@ -68,8 +66,7 @@ const activities: Activity[] = [
     category: "Spiritual",
     description:
       "Penuhi asupan spiritual dengan sesi talkshow inspiratif dari narasumber ternama.",
-    image:
-      "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80",
+    image: "/images/card/card-kajian.png",
     badgeBg: "bg-[#6320EE]",
     badgeIcon: BookOpen,
     pillBg: "bg-[#EAE3FF]",

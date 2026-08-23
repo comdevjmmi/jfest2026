@@ -23,34 +23,27 @@ const timelineData: TimelineItem[] = [
   },
   {
     id: 2,
-    title: "Penutupan Pendaftaran",
-    date: "6 September",
-    width: 439,
-    height: 351,
-  },
-  {
-    id: 3,
     title: "Pembagian Nomor BIB",
     date: "7-9 September",
     width: 437,
     height: 352,
   },
   {
-    id: 4,
+    id: 3,
     title: "Kajian Inspiratif",
     date: "12 September",
     width: 442,
     height: 350,
   },
   {
-    id: 5,
+    id: 4,
     title: "Aksi Donor Darah",
     date: "12 September",
     width: 438,
     height: 352,
   },
   {
-    id: 6,
+    id: 5,
     title: "Fun Run",
     date: "13 September",
     width: 542,
@@ -104,15 +97,15 @@ export function Timeline() {
 
         {/* Timeline Canvas Container */}
         <div className="relative mx-auto w-full max-w-5xl">
-          {/* Animated SVG Connecting Vector Line + Node Dots (Replaces line.png) */}
+          {/* Animated SVG Connecting Vector Line */}
           <svg
             className="pointer-events-none absolute inset-0 w-full h-full z-0 hidden md:block"
             viewBox="0 0 1000 520"
             preserveAspectRatio="none"
           >
-            {/* Red Zig-Zag Timeline Path (Fine-tuned position) */}
+            {/* Red Zig-Zag Timeline Path for 5 items */}
             <motion.path
-              d="M 166 42 L 500 42 L 834 42 L 166 306 L 500 306 L 834 306"
+              d="M 166 42 L 500 42 L 834 42 L 333 306 L 666 306"
               fill="none"
               stroke="#FF5B77"
               strokeWidth="5"
@@ -125,51 +118,55 @@ export function Timeline() {
             />
           </svg>
 
-          {/* Desktop Layout: 2 Rows matching Figma structure */}
-          <div className="relative z-10 hidden md:grid grid-cols-3 gap-y-16 gap-x-8 items-center py-6">
+          {/* Desktop Layout: 5 items */}
+          <div className="relative z-10 hidden md:block py-6">
             {/* Top Row: Tags 1, 2, 3 */}
-            {timelineData.slice(0, 3).map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, scale: 0.7, y: 35 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ ...spring, delay: index * 0.18 }}
-                whileHover={{ scale: 1.06, rotate: index % 2 === 0 ? 2 : -2 }}
-                className="flex justify-center"
-              >
-                <Image
-                  src={`/images/timeline/tag-${item.id}.png`}
-                  alt={`${item.title} - ${item.date}`}
-                  width={item.width}
-                  height={item.height}
-                  className="w-full max-w-[300px] h-auto object-contain drop-shadow-xl"
-                  priority
-                />
-              </motion.div>
-            ))}
+            <div className="grid grid-cols-3 gap-x-8 mb-16 items-center">
+              {timelineData.slice(0, 3).map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, scale: 0.7, y: 35 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ ...spring, delay: index * 0.18 }}
+                  whileHover={{ scale: 1.06, rotate: index % 2 === 0 ? 2 : -2 }}
+                  className="flex justify-center"
+                >
+                  <Image
+                    src={`/images/timeline/tag-${item.id}.png`}
+                    alt={`${item.title} - ${item.date}`}
+                    width={item.width}
+                    height={item.height}
+                    className="w-full max-w-[300px] h-auto object-contain drop-shadow-xl"
+                    priority
+                  />
+                </motion.div>
+              ))}
+            </div>
 
-            {/* Bottom Row: Tags 4, 5, 6 */}
-            {timelineData.slice(3, 6).map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, scale: 0.7, y: 35 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ ...spring, delay: (index + 3) * 0.18 }}
-                whileHover={{ scale: 1.06, rotate: index % 2 === 0 ? -2 : 2 }}
-                className="flex justify-center"
-              >
-                <Image
-                  src={`/images/timeline/tag-${item.id}.png`}
-                  alt={`${item.title} - ${item.date}`}
-                  width={item.width}
-                  height={item.height}
-                  className="w-full max-w-[310px] h-auto object-contain drop-shadow-xl"
-                  priority
-                />
-              </motion.div>
-            ))}
+            {/* Bottom Row: Tags 4, 5 (centered nicely) */}
+            <div className="flex justify-center gap-16 items-center">
+              {timelineData.slice(3, 5).map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{ opacity: 0, scale: 0.7, y: 35 }}
+                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ ...spring, delay: (index + 3) * 0.18 }}
+                  whileHover={{ scale: 1.06, rotate: index % 2 === 0 ? -2 : 2 }}
+                  className="flex justify-center w-[300px]"
+                >
+                  <Image
+                    src={`/images/timeline/tag-${item.id}.png`}
+                    alt={`${item.title} - ${item.date}`}
+                    width={item.width}
+                    height={item.height}
+                    className="w-full max-w-[310px] h-auto object-contain drop-shadow-xl"
+                    priority
+                  />
+                </motion.div>
+              ))}
+            </div>
           </div>
 
           {/* Mobile / Tablet Responsive Stack Layout */}
