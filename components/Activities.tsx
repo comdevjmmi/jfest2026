@@ -42,7 +42,7 @@ const activities: Activity[] = [
     btnBg: "bg-[#FF7E1D] hover:bg-[#e06910]",
     date: "12 September 2026",
     location: "Kampus ITS Surabaya",
-    registerUrl: "https://registin.id/events/7be5b58a", // <-- Fun Run registration link
+    registerUrl: "https://registin.id/events/2d0b295a", // <-- Fun Run registration link
   },
   {
     id: "donor",
@@ -74,7 +74,7 @@ const activities: Activity[] = [
     btnBg: "bg-[#6320EE] hover:bg-[#4d16c5]",
     date: "12 September 2026",
     location: "Masjid Manarul Ilmi ITS",
-    registerUrl: "https://registin.id/events/2d0b295a", // <-- Kajian registration link
+    registerUrl: "https://registin.id/events/7be5b58a", // <-- Kajian registration link
   },
 ];
 
