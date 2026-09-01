@@ -74,7 +74,7 @@ const activities: Activity[] = [
     btnBg: "bg-[#6320EE] hover:bg-[#4d16c5]",
     date: "12 September 2026",
     location: "Masjid Manarul Ilmi ITS",
-    registerUrl: "https://registin.id/events/046b46df", // <-- Kajian registration link
+    registerUrl: "https://its.id/m/RSVPKajianJFest2026", // <-- Kajian registration link
   },
 ];
 
