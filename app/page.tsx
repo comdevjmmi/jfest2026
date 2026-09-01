@@ -164,7 +164,7 @@ export default function Home() {
       <Countdown />
       <Activities />
       <Timeline />
-      {/* <SupportedBy /> */}
+      <SupportedBy />
       <FAQ />
       <Contact />
       <Footer />
@@ -291,9 +291,8 @@ function Schedule() {
             {schedule.map((item, i) => (
               <div
                 key={item.time}
-                className={`relative flex items-center gap-6 ${
-                  i % 2 === 0 ? "md:flex-row-reverse md:text-right" : "md:text-left"
-                }`}
+                className={`relative flex items-center gap-6 ${i % 2 === 0 ? "md:flex-row-reverse md:text-right" : "md:text-left"
+                  }`}
               >
                 <motion.div
                   className="absolute left-4 size-4 -translate-x-1/2 rounded-full border-2 border-white bg-gradient-to-br from-deep-violet to-ember shadow-[0_0_12px_rgba(99,32,238,0.6)] md:left-1/2"
