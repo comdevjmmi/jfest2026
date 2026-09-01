@@ -4,14 +4,12 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
 const logos = [
-  { id: 1, name: "Pertamina Kilang Pertamina Internasional", src: "/images/supported-by/1.png" },
-  { id: 2, name: "PLN Nusantara Power", src: "/images/supported-by/2.png" },
-  { id: 3, name: "Livoc Product", src: "/images/supported-by/3.png" },
-  { id: 4, name: "Gesits", src: "/images/supported-by/4.png" },
+  { id: 1, name: "Sponsor 1", src: "/images/supported-by/1.png" },
+  { id: 2, name: "Sponsor 2", src: "/images/supported-by/2.jpg" },
 ];
 
 // Duplicate logo list to create a seamless infinite marquee loop
-const marqueeLogos = [...logos, ...logos, ...logos, ...logos];
+const marqueeLogos = [...logos, ...logos, ...logos, ...logos, ...logos, ...logos];
 
 export function SupportedBy() {
   const reduced = useReducedMotion();
@@ -65,7 +63,7 @@ export function SupportedBy() {
               {marqueeLogos.map((item, idx) => (
                 <div
                   key={`${item.id}-${idx}`}
-                  className="relative h-12 sm:h-16 md:h-20 w-36 sm:w-48 md:w-56 shrink-0 flex items-center justify-center grayscale opacity-75 hover:grayscale-0 hover:opacity-100 transition-all duration-300 transform hover:scale-105"
+                  className="relative h-12 sm:h-16 md:h-20 w-36 sm:w-48 md:w-56 shrink-0 flex items-center justify-center transition-transform duration-300 transform hover:scale-105"
                 >
                   <Image
                     src={item.src}
