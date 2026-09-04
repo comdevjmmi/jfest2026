@@ -4,8 +4,14 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 
 const logos = [
-  { id: 1, name: "Sponsor 1", src: "/images/supported-by/1.png" },
-  { id: 2, name: "Sponsor 2", src: "/images/supported-by/2.jpg" },
+  { id: 1, name: "SEVIMA", src: "/images/supported-by/1.png" },
+  { id: 2, name: "Customcraft", src: "/images/supported-by/2.jpg" },
+  { id: 3, name: "AMH Jahe Merah", src: "/images/supported-by/3.jpg" },
+  { id: 4, name: "Apartemen Taman Melati", src: "/images/supported-by/4.png" },
+  { id: 5, name: "Cimory", src: "/images/supported-by/5.jpg" },
+  { id: 6, name: "KOMITS", src: "/images/supported-by/6.png" },
+  { id: 7, name: "Lemonilo", src: "/images/supported-by/7.png" },
+  { id: 8, name: "YMMI ITS", src: "/images/supported-by/8.png" },
 ];
 
 // Duplicate logo list to create a seamless infinite marquee loop
