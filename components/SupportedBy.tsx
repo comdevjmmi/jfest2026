@@ -61,7 +61,7 @@ export function SupportedBy() {
                 x: {
                   repeat: Infinity,
                   repeatType: "loop",
-                  duration: 25,
+                  duration: 40,
                   ease: "linear",
                 },
               }}
